@@ -3,7 +3,6 @@ import './App.css';
 
 import Form from './sub-components/Form';
 import List from './sub-components/List';
-import EditForm from './sub-components/EditForm';
 
 class App extends Component {
   constructor(props) {
@@ -25,6 +24,7 @@ class App extends Component {
 
   addItem(name) {
     let items = this.state.items;
+    console.log("in addItem, items: ", items, name);
     items.push({name: name, amount: 1});
     this.setState({items});
   }
@@ -47,9 +47,8 @@ class App extends Component {
       <div className="App">
         <h1>{this.state.message}</h1>
         <button onClick={this.changeMessage}>Click me!</button>
-        <List items={this.state.items} edit={this.editItem}/>
+        <List items={this.state.items} edit={this.editItem} delete={this.deleteItem}/>
         <Form add={this.addItem}/>
-        <EditForm edit={this.editItem} />
       </div>
     );
   }
