@@ -17,23 +17,21 @@ class ItemDetail extends Component {
     }
 
     render() {
-        return (<div className="ItemDetail">{
+        return (<React.Fragment>{
             this.state.editMode ? 
                 <EditForm edit={this.props.edit} changeEditMode={this.changeEditMode} idx={this.props.idx} prodName={this.props.prodName} amount={this.props.amount}/>
             :
-            <div>
-                <p>{this.props.prodName}</p>
-                <p>{this.props.amount}</p>
-                <button onClick={() => {
+            <tr>
+                <td><p>{this.props.prodName}</p></td>
+                <td><p>{this.props.amount}</p></td>
+                <td><button onClick={() => {
                     this.setState({editMode: true});
-                }}>Edit</button>
-                <button onClick={() => this.props.delete(this.props.idx)}>Delete</button>
-            </div>
-            }</div>);
+                }}>Edit</button></td>
+                <td><button onClick={() => this.props.delete(this.props.idx)}>Delete</button></td>
+            </tr>
+            }</React.Fragment>);
     }
 }
-
-
 
 
 class List extends Component {
@@ -45,12 +43,23 @@ class List extends Component {
     }
 
     render() {
-        return this.props.items
-        .map((item, idx) => {
+        let items = this.props.items.map((item, idx) => {
             return (
                 <ItemDetail key={idx} idx={idx} prodName={item.name} amount={item.amount} edit={this.props.edit} delete={this.props.delete} />
             )}
+        );
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>{items}</tbody>
+            </table>
         )
+
 
     }
 }
