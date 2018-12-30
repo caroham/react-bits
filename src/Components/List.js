@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import "react-router";
 
 import EditForm from './EditForm';
 
@@ -27,7 +28,7 @@ class ItemDetail extends Component {
                 <td><button onClick={() => {
                     this.setState({editMode: true});
                 }}>Edit</button></td>
-                <td><button onClick={() => this.props.delete(this.props.idx)}>Delete</button></td>
+                <td><button onClick={() => this.props.delete(this.props.idx)}>Remove</button></td>
             </tr>
             }</React.Fragment>);
     }
@@ -59,8 +60,6 @@ class List extends Component {
                 <tbody>{items}</tbody>
             </table>
         )
-
-
     }
 }
 
